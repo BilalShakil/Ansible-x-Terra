@@ -1,0 +1,9 @@
+tasks:
+- name: Add the user 'Bilal Shakil' with a specific uid and a primary group of 'sudo'
+      ansible.builtin.user:
+        name: Bshakil
+        comment: BilalShakil
+        uid: 1077
+        group: sudo
+        createhome: yes       
+        home: /home/bshakil

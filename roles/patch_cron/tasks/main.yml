@@ -1,0 +1,7 @@
+tasks:
+  - name: automate update on yum package using cron
+    cron:
+      name: "yum update"
+      minute: "0"
+      hour: "9"
+      job: "yum update" 

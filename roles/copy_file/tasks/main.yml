@@ -1,0 +1,8 @@
+tasks:
+  -  name: copying file over to slave server
+     copy:
+       src: /etc/code/test
+       dest: /root/.ansible/test
+       owner: root
+       group: root
+       mode: '0644'  
