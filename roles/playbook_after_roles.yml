@@ -1,0 +1,21 @@
+---
+
+  - hosts: webservers
+    become: yes
+    roles:
+      - nfs
+
+  - hosts: dbservers
+    become: yes
+    roles:
+      - copy
+
+  - hosts: dbservers
+    become: yes
+    roles:
+      - useradd
+
+  - hosts: testservers
+    become: yes
+    roles:
+      - cron
