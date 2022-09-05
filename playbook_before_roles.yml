@@ -1,0 +1,42 @@
+---
+
+- hosts: webservers
+  become: yes
+
+  tasks:
+  -  name: Installing nfs
+     yum:
+       name: nfs-utils
+       state: installed
+  -  name: Ensure nfs is running
+     service:
+       name: nfs
+       state: started
+
+- hosts: dbservers
+  become: yes
+  tasks:
+  -  name: copying file over to slave server
+     copy:
+       src: /etc/code/test
+       dest: /root/.ansible/test
+       owner: root
+       group: root
+       mode: '0644'  
+  - name: Add the user 'Bilal Shakil' with a specific uid and a primary group of 'sudo'
+      ansible.builtin.user:
+        name: Bshakil
+        comment: BilalShakil
+        uid: 1077
+        group: sudo
+        createhome: yes       
+        home: /home/bshakil
+- hosts: testservers
+  become: yes
+  tasks:
+  - name: automate update on yum package using cron
+    cron:
+      name: "yum update"
+      minute: "0"
+      hour: "9"
+      job: "yum update" 
